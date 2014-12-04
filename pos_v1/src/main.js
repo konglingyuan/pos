@@ -7,9 +7,8 @@ function printInventory(tags){
 function getCartItems(tags){
   var cartItems = [];
 
-  for(var i = 0; i < tags.length; i++){
-
-    var tagsArray = tags[i].split('-');
+  _.forEach(tags, function(tag){
+    var tagsArray = tag.split('-');
     var barcode = tagsArray[0];
     var count = 1;
 
@@ -24,8 +23,8 @@ function getCartItems(tags){
       var item = findItems(barcode,loadAllItems());
       cartItems.push({ item: item , count: count });
     }
-  }
 
+  });
   return cartItems;
 }
 
@@ -81,9 +80,7 @@ function promotionsCart(goldCart,cartItems){
     var goldCart = [];
     cartItemText = '***<没钱赚商店>购物清单***\n';
 
-    for(var i = 0; i < cartItems.length; i++){
-
-      var cartItem = cartItems[i];
+    _.forEach(cartItems, function(cartItem){
       var cartCount = cartItem.count;
       var cartPrice = cartItem.item.price;
       var cartUnit = cartItem.item.unit;
@@ -107,15 +104,16 @@ function promotionsCart(goldCart,cartItems){
 
         subtatol += cartCount * cartPrice;
       }
-    }
+    });
+
     cartItemText += '----------------------\n' +
     '挥泪赠送商品：\n';
 
-    for(var j = 0; j < goldCart.length; j++){
-      cartItemText += '名称：'+goldCart[j].name +
-      '，数量：'+goldCart[j].number+ goldCart[j].unit +
+    _.forEach(goldCart, function(goldCarts) {
+      cartItemText += '名称：'+goldCarts.name +
+      '，数量：'+goldCarts.number+ goldCarts.unit +
       '\n';
-    }
+    });
 
     cartItemText += '----------------------\n' +
     '总计：' + subtatol.toFixed(2) +
