@@ -31,11 +31,11 @@ function getCartItems(tags){
 function findItems(barcode,loadAllItems){
   var cartItem;
 
-  for(var i = 0; i < loadAllItems.length; i++){
-    if(barcode === loadAllItems[i].barcode){
-      cartItem = loadAllItems[i];
+  _.forEach(loadAllItems, function(loadAllItem) {
+    if(barcode === loadAllItem.barcode){
+      cartItem = loadAllItem;
     }
-  }
+  });
   return cartItem;
 }
 
