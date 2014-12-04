@@ -41,12 +41,11 @@ function findItems(barcode,loadAllItems){
 
 function findCartItems(barcode,cartItems){
   var item;
-
-  for(var i = 0; i < cartItems.length; i++){
-    if(cartItems[i].item.barcode === barcode){
-      item = cartItems[i];
+  _.forEach(cartItems, function(cartItem){
+    if(cartItem.item.barcode === barcode){
+      item = cartItem;
     }
-  }
+  });
   return item;
 }
 
