@@ -16,7 +16,6 @@ function getCartItems(tags){
       count = parseFloat(tagsArray[1]);
     }
     var cartItem = findCartItems(barcode,cartItems);
-
     if(cartItem){
       cartItem.count += count;
     }else{
@@ -57,7 +56,9 @@ function getInventoryText(cartItems){
 function promotionsCart(goldCart,cartItems){
   var cartItem = cartItems.item;
 
-  var promotion = getPromotions();
+  var promotion = _.find(loadPromotions(), function(promotion){
+    return promotion;
+  });
   var promotionBarcode = promotion.barcodes;
 
   _.forEach(promotionBarcode, function(promotionBarcodes) {
@@ -69,16 +70,6 @@ function promotionsCart(goldCart,cartItems){
     });
 
     return parseInt(cartItems.count/3);
-  }
-
-
-  function getPromotions() {
-    var promotions = loadPromotions();
-    var promotion;
-    _.forEach(promotions, function(promotionses){
-      promotion = promotionses;
-    });
-    return promotion;
   }
 
   function getCartItemsText(cartItems) {
