@@ -74,9 +74,9 @@ function promotionsCart(goldCart,cartItems){
   function getPromotions() {
     var promotions = loadPromotions();
     var promotion;
-    for(var i = 0; i < promotions.length; i++) {
-      promotion = promotions[i];
-    }
+    _.forEach(promotions, function(promotionses){
+      promotion = promotionses;
+    });
     return promotion;
   }
 
