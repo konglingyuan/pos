@@ -60,14 +60,15 @@ function promotionsCart(goldCart,cartItems){
   var promotion = getPromotions();
   var promotionBarcode = promotion.barcodes;
 
-  for(var j = 0; j < promotionBarcode.length; j++){
-    if (promotionBarcode[j] === cartItem.barcode && promotion.type === 'BUY_TWO_GET_ONE_FREE'){
+  _.forEach(promotionBarcode, function(promotionBarcodes) {
+    if (promotionBarcodes === cartItem.barcode && promotion.type === 'BUY_TWO_GET_ONE_FREE'){
       goldCart.push({name : cartItem.name,
         number : parseInt(cartItems.count/3),
         unit : cartItem.unit});
-        return parseInt(cartItems.count/3);
       }
-    }
+    });
+
+    return parseInt(cartItems.count/3);
   }
 
 
