@@ -55,22 +55,29 @@ function getInventoryText(cartItems){
 }
 
 function promotionsCart(goldCart,cartItems){
-  var promotions = loadPromotions();
   var cartItem = cartItems.item;
 
-  for(var i = 0; i < promotions.length; i++){
-    var promotion = promotions[i];
-    var promotionBarcode = promotion.barcodes;
+  var promotion = getPromotions();
+  var promotionBarcode = promotion.barcodes;
 
-    for(var j = 0; j < promotionBarcode.length; j++){
-      if (promotionBarcode[j] === cartItem.barcode && promotion.type === 'BUY_TWO_GET_ONE_FREE'){
-        goldCart.push({name : cartItem.name,
-          number : parseInt(cartItems.count/3),
-          unit : cartItem.unit});
-          return parseInt(cartItems.count/3);
-        }
+  for(var j = 0; j < promotionBarcode.length; j++){
+    if (promotionBarcode[j] === cartItem.barcode && promotion.type === 'BUY_TWO_GET_ONE_FREE'){
+      goldCart.push({name : cartItem.name,
+        number : parseInt(cartItems.count/3),
+        unit : cartItem.unit});
+        return parseInt(cartItems.count/3);
       }
     }
+  }
+
+
+  function getPromotions() {
+    var promotions = loadPromotions();
+    var promotion;
+    for(var i = 0; i < promotions.length; i++) {
+      promotion = promotions[i];
+    }
+    return promotion;
   }
 
   function getCartItemsText(cartItems) {
